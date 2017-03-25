@@ -1,0 +1,250 @@
+
+Name	API	Description
+Required #2.0	
+required	HTML5
+data-parsley-required	
+data-parsley-required="true"	
+data-parsley-required="false"	
+Validates that a required field has been filled with a non blank value. If data-parsley-required="false", validator is deactivated and the field is not required.
+Email #2.0	
+type="email"	HTML5
+data-parsley-type="email"	
+Validates that a value is a valid email address.
+Number #2.0	data-parsley-type="number"	Validates that a value is a valid number according to the given step, min and original value. 
+The default step for HTML5 is "1", which is so counterintuive that Parsley uses a default step of "any" for data-parsley-type="number". Warning! HTML5 type="number" can be counterintuitive. The default step of '1' is near useless. Moreover, for browsers that support it, the value accessible from javascript in case of invalid input is "", so you will never get an error (unless it is also required).
+Integer #2.0	
+type="number"	HTML5
+data-parsley-type="integer"	
+Validates that a value is a valid integer.
+Digits #2.0	data-parsley-type="digits"	Validates that a value is only digits.
+Alphanum #2.0	data-parsley-type="alphanum"	Validates that a value is a valid alphanumeric string.
+Url #2.0	
+type="url"	HTML5
+data-parsley-type="url"	
+Validates that a value is a valid url.
+Minlength #2.0	
+minlength="6"	HTML5
+data-parsley-minlength="6"	
+Validates that the length of a string is at least as long as the given limit.
+Maxlength #2.0	
+maxlength="6"	HTML5
+data-parsley-maxlength="6"	
+Validates that the length of a string is not longer than the given limit.
+Length #2.0	data-parsley-length="[6, 10]"	Validates that a given string length is between some minimum and maximum value.
+Min #2.0	
+min="6"	HTML5
+data-parsley-min="6"	
+Validates that a given input (number or date) or date is greater than or equal to some minimum (number or date.)
+Max #2.0	
+max="10"	HTML5
+data-parsley-max="6"	
+Validates that the given input (number or date) is less than or equal to some maximum value (number or date).
+Range #2.0	
+type="range"	HTML5
+data-parsley-range="[6, 10]"	
+Validates that a given value (number or date) is between some minimum and maximum values (numbers or dates).
+Pattern #2.0	
+pattern="\d+"	HTML5
+data-parsley-pattern="\d+"	
+Validates that a value matches a specific regular expression (regex). 
+Note that patterns are anchored, i.e. must match the whole string. 
+Parsley deviates from the standard for patterns looking like /pattern/{flag}; these are interpreted as literal regexp and are not anchored.
+MinCheck #2.0	data-parsley-mincheck="3"	Validates that a certain minimum number of checkboxes in a group are checked.
+MaxCheck #2.0	data-parsley-maxcheck="3"	Validates that a certain maximum number of checkboxes in a group are checked.
+Check #2.0	data-parsley-check="[1, 3]"	Validates that the number of checked checkboxes in a group is within a certain range.
+Equalto #2.0	data-parsley-equalto="#anotherfield"	Validates that the value is identical to another field's value (useful for password confirmation check).
+These validators are shipped in parsley.js. Have a look at Parsley Extras for more validators.
+
+Custom Validators
+Craft yours
+Of course, Parsley built-in validators are commonly used validators, and you'll need some more that fit your specific forms and validations. That's why Parsley lets you easily create your own validators.
+
+The preferred way to register them (after parsley.js is loaded) looks like:
+
+<input type="text" data-parsley-multiple-of="3" />
+[...]
+<script type="text/javascript">
+window.Parsley
+.addValidator('multipleOf', {
+requirementType: 'integer',
+validateNumber: function(value, requirement) {
+return 0 === value % requirement;
+},
+messages: {
+en: 'This value should be a multiple of %s',
+fr: 'Cette valeur doit être un multiple de %s'
+}
+});
+</script>
+The following sections go over the details on how to define a custom validator
+
+Validating function
+There are many ways a validator can specify how to validate data:
+
+Name	Description
+validateString	Is passed the input's value as a string.
+validateNumber	Use this instead of validateString when only numeric values are acceptable. Parsley will parse the input's value and pass the number, or reject the value if it's not an acceptable number
+validateDate	Define this to treate date values. Parsley will parse the input's value and pass the date, or reject the value if it's not an acceptable date. The format used must be that [of the standard](https://html.spec.whatwg.org/multipage/infrastructure.html#valid-date-string), e.g. "2017-02-28".
+validateMultiple	Is passed an array of values, in the case of checkboxes.
+Your custom validator must specify at least one of these. If it can validate both single inputs and multiple (i.e. checkboxes), then you can specify validateMultiple and one of the other two.
+
+Validating functions should return either true if the value is valid, or false otherwise. It can instead return a jQuery promise that will be resolved if the value is valid, or be rejected otherwise.
+
+Validators can reject with a custom error message as a first argument if desired.
+
+Requirement parameters
+You can specify what kind of requirement parameter your custom validator is expecting:
+
+Value of requirementType	Description
+'string'	The most generic kind; requirement passed as is, with no checking.
+'integer'	For integers only (e.g. used by minlength)
+'number'	To be used when decimal numbers are acceptable
+'date'	To be used for dates. The format used must be that [of the standard](https://html.spec.whatwg.org/multipage/infrastructure.html#valid-date-string), e.g. "2017-02-28".
+'regexp'	Requirement can be either a full regexp string (e.g. /hel+o/i) or just a simple expression (e.g. hel+o)
+'boolean'	Any value other than "false" will be considered to true, including the empty string. This is so data-parsley-required and data-parsley-required=true be treated the same way.
+You can also specify an array of these kinds. For example, if a validator has requirementType: ['integer', 'integer'], then given the requirement string "[1, 2]" it will receive 1 and 2 as second and third arguments (the first one being the value(s) to validate).
+
+For cases where more complex parameters are needed, you can specify extra parameters; refer to the source and check how the remote validator uses that.
+
+Error messages
+You can specify error messages, in as many locales as desired, using the messages option.
+
+This is equivalent to calling addMessage for each locale.
+
+UI/UX
+
+Overview
+Parsley ships a UI/UX component that is the only one responsible for classes, error messages, focus or trigger events that alter your page. It strives to be the most UX friendly. Here are the main mottos for ParsleyUI:
+
+Min char validation: Parsley by default does not proceed with field validation when less than 3 chars have been input. Do not assault your users with error messages too soon!
+One error at the time: constraints are prioritized in Parsley, and if several of them are not met for a field on validation, only show the most important one.
+Quick error removal: when a field is detected and shown as invalid, further checks are done on each keypress to try to quickly remove error messages once the field is ok.
+Control focusing on error: on form submission, the first error field is focused to allow the user to easily start fixing errors.
+Naturally, all of this is absolutely customizable; you'll see below how to configure your desired UX behavior.
+
+Classes and templates
+Parsley adds its share of classes and elements, to ease nice UI validation result display. By default, it will add parsley-success and parsley-error classes depending on the validation result, on the input itself for a simple text, textarea and select input, and on the parent for radio / checkboxes inputs.
+
+Customize your classes
+You could change these classes' names in configuration, and the class holder element too.
+UI for form
+Name	API	Description
+UI Enabled #2.0	data-parsley-ui-enabled="false"	Activate or deactivate UI
+Focus #2.0	data-parsley-focus="first"	Focus failing field on form validation. Possible values: 'first' | 'last' | 'none'
+UI for field
+Name	API	Description
+Trigger #2.0	data-parsley-trigger="input"	Specify one or many javascript events that will trigger item validation, before any failure. To set multiple events, separate them with a space data-parsley-trigger="focusin focusout". Default is null. See the various events supported by jQuery.
+Trigger After Failure#2.0	data-parsley-trigger-after-failure="focusout"	Specify one or many javascript events that will trigger item validation, after the first failure. Default is 'input'.
+No focus #2.0	data-parsley-no-focus	If this field fails, do not focus on it (if first focus strategy is on, next field would be focused, if last strategy is on, previous field would be focused)
+Validation threshold #2.0	data-parsley-validation-threshold="10"	Used with trigger option above, for all key- events, do not validate until the field has a certain number of characters. Default is 3
+Class handler #2.0	data-parsley-class-handler="#element"	Specify the existing DOM container where ParsleyUI should add error and success classes. It is also possible to configure it with a callback function from javascript, see the annotated source.
+Errors container #2.0	data-parsley-errors-container="#element"	Specify the existing DOM container where ParsleyUI should put the errors. It is also possible to configure it with a callback function from javascript, see the annotated source.
+Error message #2.0	data-parsley-error-message="my message"	Customize a unique global message for the field.
+Validator error message #2.0	data-parsley-`constraint`-message="my message"	Customize the error message for the field constraint. eg: data-parsley-required-message="this field is required"
+UI for javascript
+Field instances have low level methods to add, update & remove manage error messages. You have to manage these errors completely manually and they should be independant with other validations. Prefer using custom validations whenever possible. Note that getErrorsMessages only return errors from validations and not manually added errors.
+
+Name	Method	Description
+Add error #2.0	addError(name, {message: , assert: , updateClass: true});	Add an error message.
+Update error #2.0	updateError(name, {message: , assert: , updateClass: true});	Update an already added error message error.
+Remove error #2.0	removeError(name, {updateClass: true});	Remove an already present error.
+Events
+
+Overview
+Parsley triggers events that allows ParsleyUI to work. Further more, it could allow you to do some powerful magic if you listen properly to the right events!
+
+For performance reasons, Parsley does not use jQuery events, but the API to listen to events is very similar:
+
+$('#some-input').parsley().on('field:success', function() {
+// In here, `this` is the parlsey instance of #some-input
+});
+Similarly to jQuery events, parsley events will bubble up. For example, if a field is about to be validated, the event 'field:validate' will be triggerred first on the parsley field instance, then on the parsley form instance (if the field is bound in a form) and finally on the top level window.Parsley
+
+window.Parsley.on('field:error', function() {
+// This global callback will be called for any field that fails validation.
+console.log('Validation failed for: ', this.$element);
+});
+.
+Events List
+Name	Instance	Fired by	Description
+form:init #2.1	ParsleyForm	new Parsley()	Triggered when a Form is bound for the first time.
+form:validate #2.1	ParsleyForm	.validate()	Triggered when a form validation is triggered, before its validation.
+form:success #2.1	ParsleyForm	.validate()	Triggered when a form validation is triggered, after its validation succeeds.
+form:error #2.1	ParsleyForm	.validate()	Triggered when a form validation is triggered, after its validation fails.
+form:validated #2.1	ParsleyForm	.validate()	Triggered when a form validation is triggered, after its validation finishes (with success or with errors).
+form:submit #2.2	ParsleyForm	submit()	Triggered when after a form validation succeeds and before the form is actually submitted.
+Return `false` to interrupt submission.
+field:init #2.1	ParsleyField	new Parsley()	Triggered when a Field is bound for the first time.
+field:validate #2.1	ParsleyField	.validate()	Triggered when a field validation is triggered, before its validation.
+field:success #2.1	ParsleyField	.validate()	Triggered when a field validation succeeds.
+field:error #2.1	ParsleyField	.validate()	Triggered when a field validation fails.
+field:validated #2.1	ParsleyField	.validate()	Triggered after a field is validated (with success or with errors).
+Parsley Remote
+
+Parsley remote is an easy to use ajax asynchronous validator.
+
+Options
+Name	API	Description
+Remote validator	data-parsley-remote #2.0	Define the url that will be called to validate the entered content. e.g. data-parsley-remote="http://url.ext". 
+If the url contains the string "{value}", the value will replace it in the URL (typical of RESTful APIs), otherwise the value will be passed as a data parameter, with the key being the input's name or ID.
+Reverse	data-parsley-remote-reverse #2.0	By default, all 2xx ajax returs are considered valid, all others failure. Sometimes (when a call is needed to see if an email, a pseudo is available for example) a 404 API answer could be the right answer. Using data-parsley-remote-reverse="true" will consider 200 response is an error, and 404 one is correct.
+Options	data-parsley-remote-options #2.0	You could pass a json object to the $.ajax() method used by remote validator. eg:
+data-parsley-remote-options='{ "type": "POST", "dataType": "jsonp", "data": { "token": "value" } }'
+Warning: you must format your JSON string wrapping all the keys/values with " like above otherwise it won't be correctly parsed by $.parseJSON() used behind the scenes by remote validator (See jQuery doc)
+Validator	data-parsley-remote-validator #2.0	
+Use a specific remote validator. By default, there are 2 built-in remote validators: default and reverse. Default one is used by default and Reverse one used when data-parsley-remote-reverse is set to true. (this is an alias, you could use data-parsley-remote-validator="reverse").
+
+Inside the function, this keyword refers to the ParsleyField instance attached to the form element. You have access to the plugin as well as the element if you need to perform other actions before returning the validation result.
+
+To learn how to craft your custom remote validators, go here.
+
+Events
+Name	Instance	Fired by	Description
+field:ajaxoptions #2.2	ParsleyField	whenIsValid & al.	Triggered just before an ajax request is sent, so one can tweak the options passed to $.ajax. Options are passed as a second parameter.
+Methods
+Method	Description
+Parsley.addAsyncValidator(name, fn) #2.0	Specify custom validator for Ajax results.
+Custom remote validators
+If you need some custom processing of Ajax responses, configure your custom remote as follows:
+
+<input name="q" type="text" data-parsley-remote data-parsley-remote-validator='mycustom' value="foo" />
+[...]
+<script href="parsley.remote.js"></script>
+<script type="text/javascript">
+window.Parsley.addAsyncValidator('mycustom', function (xhr) {
+console.log(this.$element); // jQuery Object[ input[name="q"] ]
+
+return 404 === xhr.status;
+}, 'http://mycustomapiurl.ext');
+</script>
+Parsley Extras
+
+You'll find in the src/extra/ directory in Parsley .zip or Github projects many more or less useful validators crafted by the community. A doc here is coming.
+
+Validators list
+Name	API	Description
+Greater than #2.0	
+data-parsley-gt="#anotherfield"	
+data-parsley-gt="6"	
+Validates that the value is greater than another field's value or some strict minimum number.
+Greater than or equal to #2.0	
+data-parsley-gte="#anotherfield"	
+data-parsley-gte="6"	
+Validates that the value is greater than or equal to another field's value or some minimum number.
+Less than #2.0	
+data-parsley-lt="#anotherfield"	
+data-parsley-lt="6"	
+Validates that the value is less than another field's value or some strict maximum number.
+Less than or equal to #2.0	
+data-parsley-lte="#anotherfield"	
+data-parsley-lte="6"	
+Validates that the value is less than or equal to another field's value or some minimum number.
+Minwords #2.0	
+data-parsley-minwords="200"	
+Validates that the value have at least a certain amount of words
+Maxwords #2.0	
+data-parsley-maxwords="200"	
+Validates that the value have a maximum of a certain amount of words
+Words #2.0	
+data-parsley-words="[200, 600]"	
+Validates that the value is within a certain range of words
