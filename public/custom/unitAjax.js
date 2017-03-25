@@ -6,11 +6,11 @@ $(document).ready(function()
   serverSide: true,
   ajax: dataurl,
   columns: [
-  // {data: 'intBuilCode', name: 'intBuilCode'},
-  {data: 'intFloorNum', name: 'intFloorNum'},
-  {data: 'strUnitCode', name: 'strUnitCode'},
+  {data: 'strBuilDesc', name: 'tblBuilding.strBuilDesc'},
+  {data: 'intFloorNum', name: 'tblFloor.intFloorNum'},
+  {data: 'strUnitCode', name: 'tblUnit.strUnitCode'},
   {data: 'intUnitType', name: 'intUnitType'},
-  {data: 'intUnitNumber', name: 'intUnitNumber'},
+  {data: 'intUnitNumber', name: 'tblUnit.intUnitNumber'},
   {data: 'dblUnitArea', name: 'dblUnitArea'},
   {data: 'boolIsActive', name: 'boolIsActive', searchable: false},
   {data: 'action', name: 'action', orderable: false, searchable: false}

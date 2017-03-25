@@ -18,7 +18,7 @@ class unitController extends Controller
     public function data()
     {
         $result=DB::table("tblUnit")
-        ->select("tblBuildingType.strBuilTypeDesc","tblFloor.*","tblBuilding.*","tblUnit.*")
+        ->select(['tblBuilding.strBuilDesc','tblFloor.intFloorNum','tblUnit.strUnitCode','tblUnit.intUnitType','tblUnit.intUnitNumber','tblUnit.dblUnitArea','tblUnit.boolIsActive','tblUnit.intUnitCode'])
         ->join("tblFloor","tblUnit.intFloorCode","tblFloor.intFloorCode")
         ->join("tblBuilding","tblFloor.intBuilCode","tblBuilding.intBuilCode")
         ->join("tblBuildingType","tblBuilding.intBuilTypeCode","tblBuildingType.intBuilTypeCode")

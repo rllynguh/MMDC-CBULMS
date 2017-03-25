@@ -125,6 +125,8 @@ Route::resource("utilities","utilitiesController");
 
 Route::resource("registration","registrationController");
 
+Route::resource("reports/registration","registrationReportController");
+
 
 
 
