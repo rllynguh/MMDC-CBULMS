@@ -43,12 +43,19 @@ $('#myList').on('click', '.open-modal',function()
   {
 //success data
 console.log(data);
-
-$('#btnSave').val('Edit');
-changeLabel();
-$('#myId').val(data.intBankCode);
-$('#txtBankDesc').val(data.strBankDesc);
-$('#myModal').modal('show');
+if(data=="Deleted")
+{
+ $.notify("The Record has been deleted by another user.", "warning");
+ table.draw();
+}
+else
+{
+  $('#btnSave').val('Edit');
+  changeLabel();
+  $('#myId').val(data.intBankCode);
+  $('#txtBankDesc').val(data.strBankDesc);
+  $('#myModal').modal('show');
+}
 }) 
 });
 //delete task and remove it from list

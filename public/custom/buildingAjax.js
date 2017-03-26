@@ -90,6 +90,10 @@ $("#comProvince").change(function(data){
     { 
       if($('#frmFloor').parsley().isValid())
       {
+        $("#btnSaveFloor").attr('disabled','disabled');
+        setTimeout(function(){
+          $("#btnSaveFloor").removeAttr('disabled');
+        }, 1000);
         $.ajaxSetup(
         {
           headers: {
@@ -196,25 +200,29 @@ $("#comProvince").change(function(data){
    });
     xhrPool=[];
     //create new task / update existing task
-    $('#btnSave').on('click',function(e)
+    $('#btnSave').on('click',function()
     { 
       if($('#myForm').parsley().isValid())
-        {$.ajaxSetup(
-          {
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-          })
-      e.preventDefault(); 
-      var my_url = url;
-      var type="POST";
-      var formData = $("#myForm").serialize();
-      if($('#btnSave').val()=="Edit")
       {
-        var myId = $('#myId').val();
-        type = "PUT";
-        my_url += '/' + myId;
-      }
+        $("#btnSave").attr('disabled','disabled');
+        setTimeout(function(){
+          $("#btnSave").removeAttr('disabled');
+        }, 1000);
+        $.ajaxSetup(
+        {
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+          }
+        })
+        var my_url = url;
+        var type="POST";
+        var formData = $("#myForm").serialize();
+        if($('#btnSave').val()=="Edit")
+        {
+          var myId = $('#myId').val();
+          type = "PUT";
+          my_url += '/' + myId;
+        }
                //for updating existing resource
                
                console.log(formData);

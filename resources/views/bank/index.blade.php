@@ -44,7 +44,7 @@ Bank
               <div class="form-group p-l-30">
                 <div class="form-line">
                   <input autocomplete="off" type="text" class="form-control align-center"
-                  id="txtBankDesc" name="txtBankDesc" minlength="3" maxlength="35" required placeholder="Ex. Security Bank" >
+                  id="txtBankDesc" name="txtBankDesc" minlength="3" maxlength="35" data-parsley-pattern = '^[a-zA-Z0-9. ]+$' required placeholder="Ex. Security Bank" >
                 </div>
               </div>
             </div>

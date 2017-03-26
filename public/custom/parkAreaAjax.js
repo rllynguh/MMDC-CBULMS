@@ -276,6 +276,10 @@ $("#comBuilding").change(function(data)
   { 
     if($('#frmParkSpace').parsley().isValid())
     {
+      $("#btnSaveParkSpace").attr('disabled','disabled');
+      setTimeout(function(){
+        $("#btnSaveParkSpace").removeAttr('disabled');
+      }, 1000);
       $.ajaxSetup(
       {
         headers: {

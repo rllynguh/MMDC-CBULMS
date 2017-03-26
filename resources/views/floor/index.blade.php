@@ -51,11 +51,13 @@
                   </div>
 
                   <div class="form-group p-l-10">
-                    <h5 class="card-inside-title">Unit Type</h5>
-                    <select required id="comUnitType" name="comUnitType" class="form-control show-tick align-center">
-                     <option value="0">Raw</option>
-                     <option value="1">Shell</option>
-                   </select>
+                    <div class="form-line">
+                      <h5 class="card-inside-title">Unit Type</h5>
+                      <select required id="comUnitType" name="comUnitType" class="form-control show-tick align-center">
+                       <option value="0">Raw</option>
+                       <option value="1">Shell</option>
+                     </select>
+                   </div>
                  </div>
                  <div class="form-group p-l-10">
                    <div class="form-line">
@@ -63,7 +65,7 @@
                      <input readonly="" required="" type="text" id="txtUUNum" name="txtUUNum" class="form-control align-center" maxlength="20" required >
                    </div>
                  </div>
-                 <div class="form-group p-l-30 p-b-10">
+                 <div class="form-group ">
                   <div class="col-md-12 col-sm-12">
                     <div class="form-line">
                       <h5 class="card-inside-title">Area</h5>
@@ -107,7 +109,7 @@
                 <div class="form-group p-l-10">
                   <div class="form-line">
                     <h5 class="card-inside-title">Number of Units</h5>
-                    <input autocomplete="off" min="1" max="99" required  id="txtUNum" name="txtUNum" type="number" class="form-control text-center " data-parsley-pattern="^[0-9]+$" data-parsley-type="number">
+                    <input minlength="1" maxlength="2" autocomplete="off" min="1" max="99" required  id="txtUNum" name="txtUNum" type="text" class="form-control text-center " data-parsley-pattern="^[0-9]+$" data-parsley-type="digits">
                   </div>
                 </div>
               </div>

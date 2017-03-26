@@ -24,6 +24,7 @@
 
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/parsleyStyle.css" rel="stylesheet">
 
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->

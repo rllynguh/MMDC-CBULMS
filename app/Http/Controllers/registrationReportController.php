@@ -17,8 +17,11 @@ class registrationReportController extends Controller
     public function index()
     {
         //
-        $result=registrationHeaderModel::select("tblRegistrationHeader.*")
+        $result=registrationHeaderModel::select("tblRegistrationHeader.*","tblRegistrationHeader.*","tblTenant.*","tblBusinessType.*","tblUnit.*")
         ->join('tblRegistrationDetail','tblRegistrationHeader.intRegiCode','tblRegistrationDetail.intRegiCode')
+        ->join('tblUnit','tblRegistrationDetail.intUnitCode','tblUnit.intUnitCode')
+        ->join('tblTenant','tblRegistrationHeader.intTenaCode','tblTenant.intTenaCode')
+        ->join('tblBusinessType','tblTenant.intBusiTypeCode','tblBusinessType.intBusiTypeCode')
         ->get();
         view()->share('result',$result);
         $pdf = PDF::loadView('reports.registrationReport', $result);

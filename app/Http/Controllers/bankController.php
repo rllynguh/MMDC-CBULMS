@@ -99,8 +99,14 @@ class bankController extends Controller
   public function edit($id)
   {
         //
-    $result=bankModel::find($id);
-    return Response::json($result);
+    try
+    {$result=bankModel::findOrFail($id);
+      return Response::json($result);
+    }
+    catch(\Exception $e)
+    {
+      return "Deleted";
+    }
   }
 
   /**

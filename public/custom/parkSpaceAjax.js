@@ -174,6 +174,10 @@ function getLatest()
   {
     if($('#myForm').parsley().isValid())
     {
+      $("#btnSave").attr('disabled','disabled');
+      setTimeout(function(){
+        $("#btnSave").removeAttr('disabled');
+      }, 1000);
       myId=$("#myId").val();
       console.log(myId);
       my_url=url;

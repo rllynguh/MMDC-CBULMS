@@ -113,7 +113,7 @@
                     <div class="form-group p-l-30">
                       <div class="form-line">
                         <h5 class="card-inside-title">Number of Parking Space</h5>
-                        <input autocomplete="off" min="1" max="99" type="number" id="txtPNum" name="txtPNum" class="form-control align-center" data-parsley-pattern="^[0-9]+$" data-parsley-type="number" required >
+                        <input autocomplete="off" minlength="1" maxlength="2" min="1" max="99" type="text" id="txtPNum" name="txtPNum" class="form-control align-center" data-parsley-pattern="^[0-9]+$" data-parsley-type="digits" required >
                       </div>
                     </div>
 

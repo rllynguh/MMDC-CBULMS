@@ -43,7 +43,7 @@
             <div class="modal-body">
               <div class="form-group p-l-30">
                 <div class="form-line">
-                  <input autocomplete="off" type="text" class="form-control align-center" name="txtBusiTypeDesc" id="txtBusiTypeDesc" maxlength="20" minlength="3" required placeholder="Ex. Restaurants" required>
+                  <input data-parsley-pattern = '^[a-zA-Z0-9 ]+$' autocomplete="off" type="text" class="form-control align-center" name="txtBusiTypeDesc" id="txtBusiTypeDesc" maxlength="20" minlength="3" required placeholder="Ex. Restaurants" required>
                 </div>
               </div>
             </div>

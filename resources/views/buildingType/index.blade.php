@@ -26,7 +26,7 @@ Dashboard
               <div class="modal-body">
                 <div class="form-group p-l-30">
                   <div class="form-line">
-                    <input autocomplete="off" type="text" class="form-control align-center" id="txtBuilTypeDesc" name="txtBuilTypeDesc" maxlength="20" required placeholder="Ex. Mall" required minlength="3">
+                    <input data-parsley-pattern = '^[a-zA-Z0-9. ]+$' autocomplete="off" type="text" class="form-control align-center" id="txtBuilTypeDesc" name="txtBuilTypeDesc" maxlength="20" required placeholder="Ex. Mall" required minlength="3">
                   </div>
                 </div>
               </div>

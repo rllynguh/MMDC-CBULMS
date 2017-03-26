@@ -54,24 +54,30 @@
                 <div class="modal-body">
                   <div class="form-group p-l-30 p-b-10">
                     <div class="col-md-6 col-sm-6">
-                      <h5 class="card-inside-title">Building Name</h5>
-                      <select required id="comBuilding" name="comBuilding" class="form-control show-tick align-center">
-                      </select>
+                      <div class="form-line">
+                        <h5 class="card-inside-title">Building Name</h5>
+                        <select required id="comBuilding" name="comBuilding" class="form-control show-tick align-center">
+                        </select>
+                      </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                      <h5 class="card-inside-title">Floor</h5>
-                      <select required id="comFloor" name="comFloor" class="form-control show-tick align-center">
-                      </select>
+                      <div class="form-line">
+                        <h5 class="card-inside-title">Floor</h5>
+                        <select required id="comFloor" name="comFloor" class="form-control show-tick align-center">
+                        </select>
+                      </div>
                     </div>
                   </div>
 
                   <div class="form-group p-l-30 p-b-10">
                     <div class="col-md-6 col-sm-6">
-                      <h5 class="card-inside-title">Unit Type</h5>
-                      <select required id="comUnitType" name="comUnitType" class="form-control show-tick align-center">
-                       <option value="0">Raw</option>
-                       <option value="1">Shell</option>
-                     </select>
+                      <div class="form-line">
+                        <h5 class="card-inside-title">Unit Type</h5>
+                        <select required id="comUnitType" name="comUnitType" class="form-control show-tick align-center">
+                         <option value="0">Raw</option>
+                         <option value="1">Shell</option>
+                       </select>
+                     </div>
                    </div>
                    <div class="col-md-6 col-sm-6">
                      <div class="form-line">

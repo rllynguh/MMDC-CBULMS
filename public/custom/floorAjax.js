@@ -115,21 +115,26 @@ $(document).ready(function()
     $('#btnSave').on('click',function(e)
     { 
       if($("#myForm").parsley().isValid())
-        {$.ajaxSetup(
-          {
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-          })
-      e.preventDefault(); 
-      var my_url = url;
-      var formData = $("#myForm").serialize();
-      type="POST";
-      if($("#btnSave").val()=="Edit")
-        {myId = $('#myId').val();
-      type = "PUT";
-      my_url += '/' + myId;
-    }
+      {
+        $("#btnSave").attr('disabled','disabled');
+        setTimeout(function(){
+          $("#btnSave").removeAttr('disabled');
+        }, 1000);
+        $.ajaxSetup(
+        {
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+          }
+        })
+        e.preventDefault(); 
+        var my_url = url;
+        var formData = $("#myForm").serialize();
+        type="POST";
+        if($("#btnSave").val()=="Edit")
+          {myId = $('#myId').val();
+        type = "PUT";
+        my_url += '/' + myId;
+      }
                //for updating existing resource
                
                console.log(formData);
@@ -259,6 +264,10 @@ $(document).ready(function()
     { 
       if($('#frmUnit').parsley().isValid())
       {
+        $("#btnSaveUnit").attr('disabled','disabled');
+        setTimeout(function(){
+          $("#btnSaveUnit").removeAttr('disabled');
+        }, 1000);
         $.ajaxSetup(
         {
           headers: {

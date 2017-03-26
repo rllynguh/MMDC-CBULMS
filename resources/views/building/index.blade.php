@@ -6,7 +6,7 @@
     <script src="plugins/dropzone/dropzone.js"></script>
     <script src="plugins/jquery-steps/jquery.steps.js"></script>
     <script src="plugins/jquery-spinner/js/jquery.spinner.js"></script>
-    <script src="plugins/multi-select/js/jquery.multi-select.js"></script>`
+    <script src="plugins/multi-select/js/jquery.multi-select.js"></script>
     <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script type="text/javascript">
@@ -49,7 +49,7 @@
                     <div class="form-group p-l-10">
                       <div class="form-line">
                         <h5 class="card-inside-title">Number of Units</h5>
-                        <input autocomplete="off" min="1" max="99" required  id="txtUNum" name="txtUNum" type="number" class="form-control text-center " data-parsley-pattern="^[0-9]+$" data-parsley-type="number">
+                        <input autocomplete="off" minlength="1" maxlength="2" data-parsley-type="digits" min="1" max="99" required  id="txtUNum" name="txtUNum" type="text" class="form-control text-center " data-parsley-pattern="^[0-9]+$">
                       </div>
                     </div>
                   </div>
@@ -105,17 +105,17 @@
                     <div class="col-sm-6 col-md-6">
                       <div class="form-line">
                         <h5 class="card-inside-title">Building Name</h5>
-                        <input autocomplete="off" type="text" name="txtBuilDesc" id="txtBuilDesc" class="form-control align-center" minlength="3" maxlength="20" required>
+                        <input autocomplete="off" data-parsley-pattern = '^[a-zA-Z0-9. ]+$' type="text" name="txtBuilDesc" id="txtBuilDesc" class="form-control align-center" minlength="3" maxlength="20" required>
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group p-l-30 p-b-10">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                       <div class="form-line">
                         <h5 class="card-inside-title">Number of Floors</h5>
                         <input autocomplete="off" id="txtBFNum" name="txtBFNum" min="1" max="99"
-                        type="number" class="form-control text-center" value="1"
+                        type="text" minlength="1" maxlength="2" class="form-control text-center" value="1"
                         required data-parsley-pattern="^[0-9]+$" data-parsley-type="number"
                         >
                       </div>
@@ -126,19 +126,19 @@
                     <div class="col-sm-4 col-md-4">
                       <div class="form-line">
                         <h5 class="card-inside-title">Address No.</h5>
-                        <input autocomplete="off" type="text" class="form-control align-center" name="txtSNum" id="txtSNum" maxlength="20" minlength="1" required >
+                        <input data-parsley-type="digits" autocomplete="off" type="text" class="form-control align-center" name="txtSNum" id="txtSNum" maxlength="20" minlength="1" required >
                       </div>
                     </div>
                     <div class="col-sm-4 col-md-4">
                       <div class="form-line">
                         <h5 class="card-inside-title">Street</h5>
-                        <input autocomplete="off" type="text" class="form-control align-center" name="txtStreet" id="txtStreet" maxlength="20" minlength="3" required >
+                        <input autocomplete="off" type="text" data-parsley-pattern = '^[a-zA-Z0-9. ]+$' class="form-control align-center" name="txtStreet" id="txtStreet" maxlength="20" minlength="3" required >
                       </div>
                     </div>
                     <div class="col-sm-4 col-md-4">
                       <div class="form-line">
                         <h5 class="card-inside-title">Town / Barangay</h5>
-                        <input autocomplete="off" type="text" class="form-control align-center" name="txtDistrict" id="txtDistrict" maxlength="20" minlength="3" required >
+                        <input data-parsley-pattern = '^[a-zA-Z0-9. ]+$' autocomplete="off" type="text" class="form-control align-center" name="txtDistrict" id="txtDistrict" maxlength="20" minlength="3" required >
                       </div>
                     </div>
                   </div>

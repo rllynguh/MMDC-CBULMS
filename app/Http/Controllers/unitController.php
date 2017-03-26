@@ -28,7 +28,7 @@ class unitController extends Controller
         ->get();
         return Datatables::of($result)
         ->addColumn('action', function ($data) {
-            return '<button type="button" class="btn bg-blue btn-circle waves-effect waves-circle waves-float open-modal" value="'.$data->intUnitCode.'"><i class="mdi-editor-border-color"></i></button> <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float deleteRecord" value= "'.$data->intUnitCode.'"><i class="mdi-action-delete"></i></button>';
+            return '<button type="button" class="btn bg-blue btn-circle waves-effect waves-circle waves-float open-modal" value="'.$data->intUnitCode.'"><i class="mdi-editor-border-color"></i></button>';
         })
         ->editColumn('boolIsActive', function ($data) {
           $checked = '';
@@ -135,13 +135,13 @@ class unitController extends Controller
      */
     public function update(Request $request, $id)
     {
-     $unit=unitModel::find($id);
-     $unit->intUnitType=$request->comUnitType;
-     $unit->dblUnitArea=$request->txtArea;
-     $unit->intUnitNumber=$request->txtUNum;
-     $unit->save();
-     return Response::json("succes update");
- }
+       $unit=unitModel::find($id);
+       $unit->intUnitType=$request->comUnitType;
+       $unit->dblUnitArea=$request->txtArea;
+       $unit->intUnitNumber=$request->txtUNum;
+       $unit->save();
+       return Response::json("succes update");
+   }
 
     /**
      * Remove the specified resource from storage.
@@ -152,8 +152,8 @@ class unitController extends Controller
     public function destroy($id)
     {
         //
-       try
-       {
+     try
+     {
         $result = unitModel::findorfail($id);
         try
         {

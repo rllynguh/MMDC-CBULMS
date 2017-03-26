@@ -186,6 +186,10 @@ function getLatest()
       myId=$("#myId").val();
       console.log(myId);
       my_url=url;
+      $("#btnSave").attr('disabled','disabled');
+      setTimeout(function(){
+        $("#btnSave").removeAttr('disabled');
+      }, 1000);
       $.ajaxSetup(
       {
         headers: 
